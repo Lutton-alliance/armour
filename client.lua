@@ -58,10 +58,10 @@ PlayerHasProp = false
 local policeloadout = {
 	{['i'] = 1, ['weapon'] = "WEAPON_FLASHLIGHT"},
 	{['i'] = 2, ['weapon'] = "WEAPON_COMBATPISTOL"},
-    {['i'] = 3, ['weapon'] = "WEAPON_VINTAGEPISTOL"},
+   	{['i'] = 3, ['weapon'] = "WEAPON_VINTAGEPISTOL"},
 	{['i'] = 4, ['weapon'] = "WEAPON_STUNGUN"},
 	{['i'] = 5, ['weapon'] = "WEAPON_PUMPSHOTGUN"},
-    {['i'] = 6, ['weapon'] = "WEAPON_PUMPSHOTGUN_MK2"},
+    	{['i'] = 6, ['weapon'] = "WEAPON_PUMPSHOTGUN_MK2"},
 	{['i'] = 7, ['weapon'] = "WEAPON_CARBINERIFLE"},
 	{['i'] = 8, ['weapon'] = "WEAPON_NIGHTSTICK"},
 }
