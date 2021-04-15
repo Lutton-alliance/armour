@@ -88,15 +88,13 @@ Citizen.CreateThread(function()
 						help_message("~BLIP_INFO_ICON~ Grabbing police loadout")
 					end
 					if Config.tnotify == true then
-                        exports['t-notify']:Persist({
-                            id = 'uniquePersistId',
-                            step = 'end'
+						exports['t-notify']:Image({
+                            style = 'info',
+                            duration = Config.armourtimer * 1000 - 1000,
+                            title = 'Grabbing Police Loadout',
+                            image = Config.imagenotify,
+                            sound = false
                         })
-						exports['t-notify']:Alert({
-                         style  =  'info',
-                         duration = Config.armourtimer * 1000 - 1000,
-                         message  =  'Grabbing police loadout'
-						})
 					end
                     loadAnimDict( "amb@world_human_cop_idles@male@base" )
                     loadAnimDict( "amb@world_human_cop_idles@male@idle_a" )
@@ -114,15 +112,13 @@ Citizen.CreateThread(function()
                         help_message("~BLIP_INFO_ICON~ Police Loadout Given")
 					  end
 						if Config.tnotify == true then
-                            exports['t-notify']:Persist({
-                                id = 'uniquePersistId',
-                                step = 'end'
+							exports['t-notify']:Image({
+                                style = 'info',
+                                duration = Config.armourtimer * 1000 - 1000,
+                                title = 'Police Loadout Given',
+                                image = Config.imagenotify,
+                                sound = false
                             })
-							exports['t-notify']:Alert({
-							 style  =  'info',
-                             duration = Config.armourtimer * 1000 - 1000,
-							 message  =  'Police Loadout Given'
-							})
 						end
 					end
                 end
