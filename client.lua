@@ -49,11 +49,8 @@ end
     
 positions = {
     {1548.94,836.82,76.65,0},
-    {1845.72,3684.52,33.26,0},
+    {1858.64,3690.97,33.56,0},
 }
-
-PlayerProps = {}
-PlayerHasProp = false
 
 local policeloadout = {
 	{['i'] = 1, ['weapon'] = "WEAPON_FLASHLIGHT"},
@@ -61,7 +58,7 @@ local policeloadout = {
    	{['i'] = 3, ['weapon'] = "WEAPON_VINTAGEPISTOL"},
 	{['i'] = 4, ['weapon'] = "WEAPON_STUNGUN"},
 	{['i'] = 5, ['weapon'] = "WEAPON_PUMPSHOTGUN"},
-    	{['i'] = 6, ['weapon'] = "WEAPON_PUMPSHOTGUN_MK2"},
+    {['i'] = 6, ['weapon'] = "WEAPON_PUMPSHOTGUN_MK2"},
 	{['i'] = 7, ['weapon'] = "WEAPON_CARBINERIFLE"},
 	{['i'] = 8, ['weapon'] = "WEAPON_NIGHTSTICK"},
 }
@@ -70,7 +67,8 @@ RegisterNetEvent("yt:policeLoadout")
 AddEventHandler("yt:policeLoadout", function()
  RemoveAllPedWeapons(GetPlayerPed(-1))
 end)
-Citizen.CreateThread(function ()
+
+Citizen.CreateThread(function()
     while true do
         Citizen.Wait(5)
         local player = GetPlayerPed(-1)
@@ -82,14 +80,24 @@ Citizen.CreateThread(function ()
             y = location[2]
             z = location[3]
 
-            DrawMarker(27, x, y, z, 0, 0, 0, 0, 0, 0, 1.501, 1.5001, 0.2001, 0, 127, 255, 200, 0, 0, 0, 1)
-            if position_verf(playerLoc.x, playerLoc.y, playerLoc.z, x, y, z, 2) then
-                help_message("Press ~INPUT_CONTEXT~ to get police loadout")
+            DrawMarker(27, x, y, z, 0, 0, 0, 0, 0, 0, 1.101, 1.1001, 0.2001, 0, 127, 255, 200, 0, 0, 0, 1)
+            if position_verf(playerLoc.x, playerLoc.y, playerLoc.z, x, y, z, 1) then
+				help_message("~BLIP_INFO_ICON~ Press E to get loadout")
                 if IsControlJustReleased( 0, 38 ) then
-                    exports['t-notify']:Alert({
-                        style  =  'info',
-                        message  =  'Grabbing police loadout'
-                    })
+					 if Config.tnotify == false then
+						help_message("~BLIP_INFO_ICON~ Grabbing police loadout")
+					end
+					if Config.tnotify == true then
+                        exports['t-notify']:Persist({
+                            id = 'uniquePersistId',
+                            step = 'end'
+                        })
+						exports['t-notify']:Alert({
+                         style  =  'info',
+                         duration = Config.armourtimer * 1000 - 1000,
+                         message  =  'Grabbing police loadout'
+						})
+					end
                     loadAnimDict( "amb@world_human_cop_idles@male@base" )
                     loadAnimDict( "amb@world_human_cop_idles@male@idle_a" )
                     TaskPlayAnim(GetPlayerPed(-1),"amb@world_human_cop_idles@male@base", "base",2.0, -1.0, 7000, 0, 7, false, false, false)
@@ -102,12 +110,22 @@ Citizen.CreateThread(function ()
                           SetPedComponentVariation(GetPlayerPed(-1), 9, Config.armournumber, Config.armourtexture, 0)
                           SetPedArmour(GetPlayerPed(-1), Config.armourlevel)
                      end
-                     exports['t-notify']:Alert({
-                        style  =  'info',
-                        message  =  'Police Loadout Given'
-                    })
+					  if Config.tnotify == false then
+                        help_message("~BLIP_INFO_ICON~ Police Loadout Given")
+					  end
+						if Config.tnotify == true then
+                            exports['t-notify']:Persist({
+                                id = 'uniquePersistId',
+                                step = 'end'
+                            })
+							exports['t-notify']:Alert({
+							 style  =  'info',
+                             duration = Config.armourtimer * 1000 - 1000,
+							 message  =  'Police Loadout Given'
+							})
+						end
+					end
                 end
             end
         end
-    end
-end)
+    end)
